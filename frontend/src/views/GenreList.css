@@ -1,0 +1,28 @@
+.genre_list {
+    width: 66%;
+    margin: 3rem auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.genre_item {
+    text-align: center;
+    padding: 5%;
+    font-family: var(--work-sans);
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.genre_list > a {
+    text-decoration: none;
+    color: var(--black);
+    background-color: var(--offwhite);
+}
+
+.genre_list > a:hover {
+    background-color: var(--green);
+    color: var(--white);
+}

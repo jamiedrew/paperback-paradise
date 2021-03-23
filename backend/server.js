@@ -1,5 +1,5 @@
 require("dotenv").config();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 const express = require("express");
 const app = express();
@@ -10,8 +10,23 @@ app.use(cors());
 
 const pool = require ("./db");
 
-app.get("/", (req, res) => {
-    res.json({ message: "API running"});
+// get a "bestseller list" (the first 10 items) as a default view
+app.get("/", async (req, res) => {
+    res.json({ message: "API Running"});
+
+    try {
+
+        const bestsellerList = await pool.query(
+            "SELECT * FROM books LIMIT 10"
+            )
+
+        res.json(bestsellerList.rows);
+
+    } catch (error) {
+        res.status(500).send("Server Error");
+        console.log(error);
+    }
+
 })
 
 // catalogue routes

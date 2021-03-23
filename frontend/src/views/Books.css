@@ -1,0 +1,28 @@
+.books {
+    margin-top: 3rem;
+}
+
+.books_list {
+    width: 90%;
+    margin: 3rem auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: center; */
+    gap: 1.2rem;
+}
+
+@media (max-width: 1350px) {
+    .books_list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 930px) {
+    .books_list {
+        display: flex;
+        flex-direction: column;
+    }   
+}
