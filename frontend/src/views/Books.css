@@ -1,5 +1,5 @@
 .books {
-    margin-top: 3rem;
+    margin: 3rem auto;
 }
 
 .books_list {
@@ -18,11 +18,14 @@
     .books_list {
         grid-template-columns: repeat(2, 1fr);
     }
+     
 }
 
 @media (max-width: 930px) {
     .books_list {
         display: flex;
         flex-direction: column;
-    }   
+        justify-content: center;
+        align-items: stretch;
+    } 
 }

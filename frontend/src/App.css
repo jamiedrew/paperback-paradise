@@ -7,6 +7,7 @@ nav {
     color: var(--white);
     width: 100%;
     margin: 0;
+    top: 0;
     height: 3rem;
     display: flex;
     justify-content: space-between;
@@ -23,6 +24,17 @@ nav > div {
 nav a {
   color: var(--white);
   text-decoration: none;
+  cursor: pointer;
+}
+
+nav p {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 200;
+}
+
+.cart_link {
   cursor: pointer;
 }
   
@@ -62,4 +74,19 @@ footer {
 footer a {
   text-decoration: none;
   color: var(--purple);
+}
+
+@media (max-width: 630px) {
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  nav {
+    padding: 2rem 3rem;
+  }
 }

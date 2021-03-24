@@ -16,7 +16,7 @@ router.get("/:bookID", async (req, res) => {
 
         const { bookID } = req.params;
         const book = await pool.query(
-            "SELECT * FROM books WHERE book_id = $1",
+            "SELECT * FROM books WHERE id = $1",
             [bookID]
         );
 
@@ -50,7 +50,7 @@ router.put("/:bookID", async (req, res) => {
         const { title, author, genre, price } = req.body;
 
         const updateBook = await pool.query(
-            "UPDATE books SET title = $1, author = $2, genre = $3, price = $4 WHERE book_id = $5",
+            "UPDATE books SET title = $1, author = $2, genre = $3, price = $4 WHERE id = $5",
             [title, author, genre, price, bookID]
             );
 
@@ -66,7 +66,7 @@ router.delete("/:bookID", async (req, res) => {
     try {
         const { bookID } = req.params;
         const deleteBook = await pool.query(
-            "DELETE FROM books WHERE book_id = $1",
+            "DELETE FROM books WHERE id = $1",
             [bookID]
         );
 

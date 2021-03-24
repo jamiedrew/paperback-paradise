@@ -28,6 +28,7 @@ const BooksByGenre = () => {
             { loading ? <h3>Loading...</h3> : error ? <h3>{error}</h3> : products.map(product =>
                     <Item 
                         key={product.id}
+                        id={product.id}
                         title={product.title}
                         author={product.author}
                         cover={product.cover_img}
