@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# production
+.env
+
 # dependencies
 node_modules
 node_modules/
@@ -11,6 +14,9 @@ node_modules/
 
 # production
 /build
+
+# security
+keys.js
 
 # misc
 .DS_Store

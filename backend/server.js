@@ -3,30 +3,43 @@ const PORT = 5000;
 
 const express = require("express");
 const app = express();
+
+// session management
+const session = require("cookie-session");
+const keys = require("./config/keys");
+
+app.use(session({
+    keys: [keys.session.cookie],
+    maxAge: 24 * 60 * 60 * 1000,
+    resave: false,
+    saveUninitialized: true
+}));
+
+// middleware
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// passport.js
+const passport = require("passport");
+const flash = require("express-flash");
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+const initialisePassport = require("./config/passport-setup");
+initialisePassport();
+
+app.use(flash());
+
+// CORS
 const cors = require("cors");
 app.use(cors());
 
+// database
 const pool = require ("./db");
-
-// get a "bestseller list" (the first 10 items) as a default view
+// homepage
 app.get("/", async (req, res) => {
     res.json({ message: "API Running"});
-
-    try {
-
-        const bestsellerList = await pool.query(
-            "SELECT * FROM books LIMIT 10"
-            )
-
-        res.json(bestsellerList.rows);
-
-    } catch (error) {
-        res.status(500).send("Server Error");
-        console.log(error);
-    }
-
 })
 
 // catalogue routes

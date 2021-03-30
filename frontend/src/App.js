@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState } from "react";
 
 import { FaShoppingCart } from "react-icons/fa";
@@ -7,6 +7,7 @@ import Books from "./views/Books";
 import GenreList from "./views/GenreList";
 import BooksByGenre from "./views/BooksByGenre";
 import Cart from "./views/Cart";
+import Account from "./views/Account";
 
 import './App.css';
 
@@ -25,7 +26,7 @@ function App() {
             <Link to="/genres">Genres</Link>
           </div>
           <div className="navbar_user">
-            <p>Account</p>
+            <Link to="/account">Account</Link>
             <p className="cart_link" onClick={() => setShowCart(!showCart)}><FaShoppingCart /> Cart</p>
           </div>
         </nav>
@@ -40,6 +41,7 @@ function App() {
             <Route exact path="/books" component={Books} />
               <Route exact path="/genres" component={GenreList} />
               <Route exact path="/genres/:genre" component={BooksByGenre} />
+              <Route exact path="/account" component={Account} />
               <Route exact path="/" component={Books} />
           </Switch>
         </main>
