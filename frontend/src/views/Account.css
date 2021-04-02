@@ -1,0 +1,45 @@
+#user_account {
+    width: 90%;
+    margin: 3rem auto;
+    text-align: center;
+}
+
+#user_account > .orders {
+    width: 66%;
+    margin: 1rem auto;
+    text-align: center;
+}
+
+#user_account h4 {
+    font-family: var(--work-sans);
+    font-weight: 300;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+#user_account table {
+    width: 100%;
+    margin: auto;
+    text-align: left;
+    padding: 0.4rem;
+}
+
+#user_account table th {
+    padding: 0.6rem 0;
+    background: var(--black);
+    color: var(--white);
+    font-weight: 400;
+    text-align: center;
+}
+
+#user_account table td {
+    padding: 0.4rem 0;
+    text-align: center;
+}
+
+@media (max-width: 930px) {
+    #user_account > .orders {
+        width: 90%;
+    }
+}

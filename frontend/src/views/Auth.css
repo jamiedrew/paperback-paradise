@@ -1,0 +1,37 @@
+#form-container {
+    width: 66%;
+    margin: 3rem auto;
+    text-align: center;
+}
+
+#form-container > h3 {
+    margin-bottom: 1rem;
+}
+
+
+#form-container > p {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+}
+
+#form-container > p > a {
+    text-decoration: none;
+}
+
+#form-container button {
+    margin-top: 1rem;
+}
+
+form {
+    text-align: center;
+}
+
+form ul {
+    list-style: none;
+}
+
+input {
+    width: 33%;
+    padding: 0.6rem;
+    margin: 0.2rem;
+}

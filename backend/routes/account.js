@@ -2,9 +2,12 @@ const router = require("express").Router();
 const pool = require("../db");
 const passport = require("passport");
 
+const isAuthorised = require("../utilities/authorisationCheck");
+
 router.get("/", isAuthorised, async (req, res) => {
     try {
-        // req.user has the payload!
+
+        // req.user has the payload thanks to passport.deserializeUser() !
         const user = await pool.query(
             "SELECT user_name, user_email FROM users WHERE user_id = $1",
             [req.user.user_id]
@@ -22,21 +25,40 @@ router.get("/orders", isAuthorised, async (req, res) => {
     try {
         
         const orderList = await pool.query(
-            "SELECT * FROM orders WHERE user_id = $1 ORDER BY date_created DESC",
+            "SELECT orders.order_id, orders.date_created, orders.status, books.title, books.author FROM orders JOIN books ON orders.item_id = books.id WHERE orders.user_id = $1 ORDER BY orders.date_created DESC",
             [req.user.user_id]
         );
 
-        if (orderList.rows.length === 0) {
-            res.json(`No orders from ${req.user.user_name}`);
-        } else {
-            res.json(orderList.rows);
-        }
+        res.json(orderList.rows);
+        console.log(orderList.rows);
 
     } catch (error) {
         console.error(error.message);
         res.status(500).json("Server Error");
     }
 });
+
+router.post("/orders", isAuthorised, async (req, res) => {
+    try {
+
+        let { items } = req.body;
+        console.log(items);
+        
+        items.forEach(async item => {
+            await pool.query(
+                "INSERT INTO orders (user_id, item_id, status) VALUES ($1, $2, $3)",
+                [req.user.user_id, item.id, "pending"]
+            )
+        })
+
+        console.log("Order submitted");
+        res.status(201).json("Order submitted")
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json("Server Error");
+    }
+})
 
 // router.get("/orders/:orderID", async (req, res) => {
 //     try {
@@ -66,13 +88,13 @@ router.post("/checkout", async (req, res) => {
     }
 })
 
-function isAuthorised (req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        res.status(401).json("Not authorised");
-        res.redirect("/auth/login")
-    }
-};
+// function isAuthorised (req, res, next) {
+//     if (req.user) {
+//         next();
+//     } else {
+//         res.status(401).json("Not authorised");
+//         res.redirect("/auth/login")
+//     }
+// };
 
 module.exports = router;

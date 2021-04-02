@@ -5,7 +5,7 @@ import "./CartItem.css";
 import { FaTrashAlt } from "react-icons/fa";
 import { removeFromCart } from "../redux/actions/cartActions";
 
-const CartItem = ({ id, title, cover, author, price }) => {
+const CheckoutItem = ({ id, title, cover, author, price }) => {
 
     const dispatch = useDispatch();
     const removeFromCartHandler = () => {
@@ -13,12 +13,12 @@ const CartItem = ({ id, title, cover, author, price }) => {
             console.log(`removing book ${id} from cart`);};
 
     return (
-        <div className="cart_item">
+        <div className="checkout_item">
             <button type="button" onClick={removeFromCartHandler}><FaTrashAlt /></button>
             
-            <div className="image">
+            {/* <div className="image">
                 <img src={`/covers/${cover}.jpg`} alt="" />
-            </div>
+            </div> */}
 
             <div className="info">
                 <p className="title">{title}</p>
@@ -31,4 +31,4 @@ const CartItem = ({ id, title, cover, author, price }) => {
     )
 }
 
-export default CartItem;
+export default CheckoutItem;

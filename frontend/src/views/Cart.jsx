@@ -1,12 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import CartItem from "../components/CartItem";
 
 import "./Cart.css";
 
-const Cart = ({show}) => {
-
-    const dispatch = useDispatch();
+const Cart = ({show, click}) => {
+    // const dispatch = useDispatch();
 
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart;
@@ -38,7 +38,7 @@ const Cart = ({show}) => {
             </div>
             {cartItems.length > 0 && <div className="cart_info">
                 <p>Subtotal: <span className="subtotal">£{getSubtotal().toFixed(2)}</span></p>
-                <button>Checkout</button>
+                <Link to="/checkout"><button onClick={click}>Checkout</button></Link>
             </div>}
         </div>
     )

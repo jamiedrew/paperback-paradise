@@ -27,8 +27,6 @@ const initialise = () => {
                 return done(null, false, { message: "Incorrect password"});
             };
 
-            console.log(user.rows[0]);
-    
             return done(null, user);
     
         } catch (error) {
@@ -44,7 +42,6 @@ const initialise = () => {
     ));
 
     passport.serializeUser((user, done) => {
-        console.log(user.rows[0]);
         done(null, user.rows[0].user_id);
     })
 
@@ -53,8 +50,6 @@ const initialise = () => {
             "SELECT * FROM users WHERE user_id = $1",
             [id]
         )
-
-        console.log(`Logged in as ${user.rows[0].user_name}`);
         done(null, user.rows[0]);
     })
 

@@ -3,15 +3,10 @@ const passport = require("passport");
 const router = require("express").Router();
 const pool = require("../db");
 const bcrypt = require("bcrypt");
-const { route } = require("./account");
 
-// const jwtGenerator = require("../utils/jwtGenerator");
-// const validInfo = require("../middleware/validInfo");
-// const authorisation = require("../middleware/authorisation");
+const isAuthorised = require("../utilities/authorisationCheck");
 
-router.get("/login", (req, res) => {
-    res.json("This is a login page.")
-})
+// LOGIN
 
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/account",
@@ -19,9 +14,10 @@ router.post("/login", passport.authenticate("local", {
     failureFlash: false
 }))
 
-router.get("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
+    console.log("Logging out");
     req.logout();
-    res.redirect("/");
+    return res.redirect("/");
 })
 
 // // REGISTER USER
@@ -59,45 +55,5 @@ router.post("/register", async (req, res) => {
 });
 
 // AUTHORISATION CHECKS 
-
-// // LOGIN
-// router.post("/login", async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-
-//         // check if the user exists in database
-//         const user = await pool.query(
-//             "SELECT * FROM users WHERE user_email = $1",
-//             [email]
-//         );
-
-//         if (user.rows.length === 0) {
-//             return res.status(401).json(`No account exists for ${email}`);
-//         }
-
-//         // check password
-//         const validPassword = await bcrypt.compare(password, user.rows[0].user_password);
-
-//         if (!validPassword) {
-//             return res.status(401).json("Incorrect password");
-//         };
-
-//         return res.json(user.rows[0].user_name);
-
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json("Server Error");
-//     }
-// });
-
-// // // this route keeps us logged in when the react app refreshes
-// // router.get("/is-verified", authorisation, async (req, res) => {
-// //     try {
-// //         res.json(true);
-// //     } catch (error) {
-// //         console.error(error.message);
-// //         res.status(500).send("Server Error");
-// //     }
-// // })
 
 module.exports = router;

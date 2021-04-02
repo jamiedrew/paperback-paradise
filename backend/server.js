@@ -39,7 +39,8 @@ app.use(cors());
 const pool = require ("./db");
 // homepage
 app.get("/", async (req, res) => {
-    res.json({ message: "API Running"});
+    // res.json({ message: "API Running"});
+    res.json(req.user);
 })
 
 // catalogue routes
