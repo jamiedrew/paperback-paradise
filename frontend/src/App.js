@@ -33,8 +33,6 @@ function App() {
 
   }, []);
 
-  // console.log(user);
-
   return (
     <Router>
       <Cart show={showCart} click={() => setShowCart(false)} />

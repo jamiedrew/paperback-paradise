@@ -1,5 +1,5 @@
 require("dotenv").config();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 const express = require("express");
 const app = express();
@@ -37,6 +37,7 @@ app.use(cors());
 
 // database
 const pool = require ("./db");
+
 // homepage
 app.get("/", async (req, res) => {
     // res.json({ message: "API Running"});
